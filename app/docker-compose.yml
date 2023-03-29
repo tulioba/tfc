@@ -47,7 +47,7 @@ services:
     container_name: db
     platform: linux/x86_64
     ports:
-      - 3002:3306
+      - 3002:3306 # PORTA 3002 É A PORTA DO MEU CONTAINER, 3306 É A PORT DO MYSQL2
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: 'always'
