@@ -14,7 +14,7 @@ export default class TeamService {
 
     if (!team) {
       const status = 401;
-      const message = 'Team dont exists';
+      const message = 'Team does not exist';
       throw Object({ status, message });
     }
 
