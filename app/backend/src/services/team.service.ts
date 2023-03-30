@@ -6,8 +6,6 @@ export default class TeamService {
   public getTeams = async () => {
     const result = await this.teamModel.findAll();
 
-    console.log(result);
-
-    return result;
+    return { status: 200, message: result };
   };
 }

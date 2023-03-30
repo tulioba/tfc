@@ -11,8 +11,8 @@ export default class TeamController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      const result = await this.teamService.getTeams();
-      res.status(200).json({ message: result });
+      const data = await this.teamService.getTeams();
+      res.status(data.status).json(data.message);
     } catch (error) {
       next(error);
     }
