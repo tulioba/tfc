@@ -8,4 +8,16 @@ export default class TeamService {
 
     return { status: 200, message: result };
   };
+
+  public getTeamById = async (id: string) => {
+    const team = await this.teamModel.findByPk(id);
+
+    if (!team) {
+      const status = 401;
+      const message = 'Team dont exists';
+      throw Object({ status, message });
+    }
+
+    return { status: 200, message: team.dataValues };
+  };
 }
