@@ -13,9 +13,7 @@ export default class UserController {
   ): Promise<void> => {
     try {
       const user: ILogin = req.body;
-      if (!user.email || !user.password) {
-        throw Object({ status: 400, message: 'All fields must be filled' });
-      }
+
       const data = await this.userService.loginUser(user);
 
       const { email } = data.message;
