@@ -1,6 +1,7 @@
 import * as express from 'express';
 import teamRouter from './routes/team.routes';
 import userRouter from './routes/user.routes';
+import { IError } from './interfaces';
 
 class App {
   public app: express.Express;
@@ -26,7 +27,12 @@ class App {
     this.app.use(accessControl);
     this.app.use('/teams', teamRouter);
     this.app.use('/login', userRouter);
-    // COLOCAR O TRATAMENTO DE ERROR AQUI
+
+    this.app.use((error:
+    IError, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+      if (error.status) { return res.status(error.status).json({ message: error.message }); }
+      return res.status(500).json({ message: error.message });
+    });
   }
 
   public start(PORT: string | number):void {

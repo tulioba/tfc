@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
+import { ILogin } from '../interfaces/index';
 import UserService from '../services/user.service';
+import UserToken from '../auth/validateJWT';
 
 export default class UserController {
   constructor(private userService = new UserService()) {}
@@ -10,11 +12,16 @@ export default class UserController {
     next: NextFunction,
   ): Promise<void> => {
     try {
-      console.log('ANTES DE ENTRAR NA SERVICE');
-      const data = await this.userService.loginUser();
-      console.log('SAINDO DA SERVICE');
+      const user: ILogin = req.body;
+      if (!user.email || !user.password) {
+        throw Object({ status: 400, message: 'All fields must be filled' });
+      }
+      const data = await this.userService.loginUser(user);
 
-      res.status(data.status).json(data.message);
+      const { email } = data.message;
+      const token = UserToken.createToken(email);
+
+      res.status(data.status).json({ token });
     } catch (error) {
       next(error);
     }
