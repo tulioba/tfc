@@ -24,3 +24,8 @@ export interface ILogin {
 //   status: number;
 //   message: [];
 // }
+
+export interface IStatus {
+  ok: number;
+  statusBadRequest: number
+}

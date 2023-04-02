@@ -4,15 +4,15 @@ export default class UserValidation {
     return emailRegex.test(email);
   }
 
-  public static validatePassword(password: string): boolean {
-    const passwordRegex = /^[0-9]+$/; /* Senha pode ter apenas nÃºmeros */
-    return passwordRegex.test(password);
+  public static validatePassword(password: string): boolean | undefined {
+    const minLength = 6;
+    return (password.length >= minLength);
   }
 
-  public static validateUser(
+  public static valideUser(
     email: string,
     password: string,
-  ): boolean {
+  ): boolean | undefined {
     return this.validateEmail(email) && this.validatePassword(password);
   }
 }
