@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcryptjs';
 import ErrorMessage from '../errorTypes/error.message';
 import User from '../database/models/User';
 import { ILogin } from '../interfaces/index';
@@ -18,6 +19,14 @@ export default class UserService {
     const result = await this.userModel.findOne({ where: { email: user.email } });
 
     if (!result) {
+      throw Object({
+        status: ErrorStatus.statusUnauthorized,
+        message: ErrorMessage.incorrectFields });
+    }
+
+    const verifyHash = bcrypt.compareSync(user.password, result?.dataValues.password);
+
+    if (!verifyHash) {
       throw Object({
         status: ErrorStatus.statusUnauthorized,
         message: ErrorMessage.incorrectFields });
