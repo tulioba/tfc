@@ -23,7 +23,7 @@ module.exports = {
       },
       homeTeamGoals: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
+        // autoIncrement: true,
         allowNull: false,
         field: "home_team_goals",
       },
@@ -41,13 +41,14 @@ module.exports = {
       },
       awayTeamGoals: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
+        // autoIncrement: true,
         allowNull: false,
         field: "away_team_goals",
       },
       inProgress: {
-        type: Sequelize,
+        type: Sequelize.BOOLEAN,
         allowNull: false,
+        field: "in_progress",
       },
     });
   },
