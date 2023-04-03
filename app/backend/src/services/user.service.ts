@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import ErrorMessage from '../errorTypes/error.message';
 import User from '../database/models/User';
-import { ILogin } from '../interfaces/index';
+import { ILogin, IUserEmail } from '../interfaces/index';
 import ErrorStatus from '../errorTypes/error.status';
 import GoodStatus from '../errorTypes/statusOkTypes/status.type';
 import UserValidation from '../validations/userValidation';
@@ -33,5 +33,11 @@ export default class UserService {
     }
 
     return { status: GoodStatus.ok, message: result.dataValues };
+  };
+
+  public userRole = async (userEmail: IUserEmail) => {
+    const result = await this.userModel.findOne({ where: { email: userEmail } });
+
+    return { status: GoodStatus.ok, message: result?.dataValues };
   };
 }

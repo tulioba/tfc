@@ -29,3 +29,7 @@ export interface IStatus {
   ok: number;
   statusBadRequest: number
 }
+
+export interface IUserEmail {
+  email: string,
+}
