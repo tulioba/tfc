@@ -28,7 +28,7 @@ class App {
     this.app.use(accessControl);
     this.app.use('/teams', teamRouter);
     this.app.use('/login', userRouter);
-    this.app.use('/match', matchRouter);
+    this.app.use('/matches', matchRouter);
 
     this.app.use((error:
     IError, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
