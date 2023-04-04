@@ -1,4 +1,5 @@
 import { ErrorRequestHandler } from 'express';
+import Match from '../database/models/Match';
 
 export interface IError extends ErrorRequestHandler {
   status: number;
@@ -32,4 +33,13 @@ export interface IStatus {
 
 export interface IUserEmail {
   email: string,
+}
+
+export interface IInProgress {
+  inProgress: boolean | string | string[],
+}
+
+export interface Idata {
+  status: number,
+  message: Match[] | void,
 }
