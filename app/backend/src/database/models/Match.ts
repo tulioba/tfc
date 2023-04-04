@@ -45,11 +45,8 @@ Match.init({
   sequelize: db,
 });
 
-// Team.hasMany(Match);
-// Match.belongsTo(Team);
-
-Match.belongsTo(Team, { foreignKey: 'homeTeamId', as: 'homeTeamId' });
-Match.belongsTo(Team, { foreignKey: 'awayTeamId', as: 'awayTeamId' });
+Match.belongsTo(Team, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+Match.belongsTo(Team, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 /**
   * `Workaround` para aplicar as associations em TS:
   * Associations 1:N devem ficar em uma das instâncias de modelo
