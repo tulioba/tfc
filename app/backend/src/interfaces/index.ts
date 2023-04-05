@@ -43,3 +43,9 @@ export interface Idata {
   status: number,
   message: Match[] | void,
 }
+
+export interface IStatus200 {
+  status: number,
+  message: string,
+
+}

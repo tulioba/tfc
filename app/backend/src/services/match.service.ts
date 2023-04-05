@@ -44,4 +44,8 @@ export default class MatchService {
 
     return { status: GoodStatus.ok, message: result };
   };
+
+  // public updateMatch = async (): Promise<IStatus200> => {
+  //   const result = await this.matchModel.findOne
+  // }
 }

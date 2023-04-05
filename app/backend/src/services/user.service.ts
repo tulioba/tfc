@@ -24,7 +24,7 @@ export default class UserService {
         message: ErrorMessage.incorrectFields });
     }
 
-    const verifyHash = bcrypt.compareSync(user.password, result?.dataValues.password);
+    const verifyHash = bcrypt.compareSync(user.password, result?.password);
 
     if (!verifyHash) {
       throw Object({
@@ -32,12 +32,18 @@ export default class UserService {
         message: ErrorMessage.incorrectFields });
     }
 
-    return { status: GoodStatus.ok, message: result.dataValues };
+    return { status: GoodStatus.ok, message: result };
   };
 
   public userRole = async (userEmail: IUserEmail) => {
     const result = await this.userModel.findOne({ where: { email: userEmail } });
 
-    return { status: GoodStatus.ok, message: result?.dataValues };
+    if (!result) {
+      throw Object({
+        status: ErrorStatus.statusUnauthorized,
+        message: ErrorMessage.incorrectFields });
+    }
+
+    return { status: GoodStatus.ok, message: result };
   };
 }

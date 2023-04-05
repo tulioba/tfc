@@ -18,6 +18,6 @@ export default class TeamService {
       throw Object({ status, message });
     }
 
-    return { status: 200, message: team.dataValues };
+    return { status: 200, message: team };
   };
 }

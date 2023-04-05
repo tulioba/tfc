@@ -15,7 +15,7 @@ const { expect } = chai;
 
 describe('Testando rota /teams',() => {
   it('if get all teams and status 200 when call it', async () => {
-    sinon.stub(Model, 'findAll').resolves();
+    sinon.stub(Team, 'findAll').resolves(allTeams as Team[]);
 
     const httpResponse = await chai
     .request(app)
@@ -26,7 +26,7 @@ describe('Testando rota /teams',() => {
   })
 
   it('if get specific by ID when call it', async () => {
-    sinon.stub(Model, 'findByPk').resolves();
+    sinon.stub(Model, 'findByPk').resolves(team as Team);
 
     const httpResponse = await chai
     .request(app)
