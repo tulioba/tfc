@@ -49,3 +49,12 @@ export interface IStatus200 {
   message: string,
 
 }
+
+export interface IBody {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}
+
+export interface IParams {
+  id: string
+}

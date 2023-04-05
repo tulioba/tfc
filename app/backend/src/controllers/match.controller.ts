@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import MatchService from '../services/match.service';
-// import { Idata } from '../interfaces/index';
+// import { IParams, IBody, RequestBody } from '../interfaces/index';
 
 export default class MatchController {
   constructor(private matchService = new MatchService()) {}
@@ -21,9 +21,39 @@ export default class MatchController {
 
       const isBoolean = queue === 'true';
 
-      console.log(isBoolean);
       const data = await this.matchService.getMatchesByQuery(isBoolean as boolean);
       res.status(data.status).json(data.message);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateMatch = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const { id } = req.params;
+      const data = await this.matchService.updateMatch(id);
+
+      res.status(data.status).json({ message: data.message });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateScoreBoard = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      const { id } = req.params;
+
+      const data = await this.matchService.updateScoreBoard(id, req.body);
+
+      res.status(data.status).json({ message: data.message });
     } catch (error) {
       next(error);
     }

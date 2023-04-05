@@ -3,7 +3,7 @@ import Match from '../database/models/Match';
 import Team from '../database/models/Team';
 // import ErrorMessage from '../errorTypes/error.message';
 import GoodStatus from '../errorTypes/statusOkTypes/status.type';
-import { Idata } from '../interfaces/index';
+import { Idata, IBody } from '../interfaces/index';
 
 export default class MatchService {
   constructor(private matchModel = Match) {}
@@ -45,7 +45,24 @@ export default class MatchService {
     return { status: GoodStatus.ok, message: result };
   };
 
-  // public updateMatch = async (): Promise<IStatus200> => {
-  //   const result = await this.matchModel.findOne
-  // }
+  public updateMatch = async (id: string) => {
+    await this.matchModel.update(
+      { inProgress: false },
+      { where: { id } },
+    );
+
+    return { status: GoodStatus.ok, message: 'Finished' };
+  };
+
+  public updateScoreBoard = async (id: string, body: IBody) => {
+    await this.matchModel.update(
+      {
+        homeTeamGoals: body.homeTeamGoals,
+        awayTeamGoals: body.awayTeamGoals,
+      },
+      { where: { id } },
+    );
+
+    return { status: GoodStatus.ok, message: 'Touchdown' };
+  };
 }
