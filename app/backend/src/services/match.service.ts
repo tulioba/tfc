@@ -1,4 +1,3 @@
-// import * as sequelize from 'sequelize';
 import Match from '../database/models/Match';
 import Team from '../database/models/Team';
 import ErrorMessage from '../errorTypes/error.message';
@@ -7,7 +6,7 @@ import GoodStatus from '../errorTypes/statusOkTypes/status.type';
 import { Idata, IScoreBody, ITeamBody } from '../interfaces/index';
 
 export default class MatchService {
-  constructor(private matchModel = Match) {}
+  constructor(private matchModel = Match, private teamModel = Team) {}
 
   public getAllMatches = async (): Promise<Idata> => {
     const result = await this.matchModel.findAll({
@@ -72,6 +71,13 @@ export default class MatchService {
       throw Object({
         status: ErrorStatus.teamsMustBeDifferents,
         message: ErrorMessage.noTwinsFairMatch });
+    }
+
+    const homeTeamExist = await this.teamModel.findByPk(body.awayTeamId);
+    const awayTeamExist = await this.teamModel.findByPk(body.homeTeamId);
+
+    if (!homeTeamExist || !awayTeamExist) {
+      throw Object({ status: 404, message: 'There is no team with such id!' });
     }
 
     const response = await this.matchModel.create({
