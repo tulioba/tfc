@@ -50,11 +50,19 @@ export interface IStatus200 {
 
 }
 
-export interface IBody {
+export interface IScoreBody {
   homeTeamGoals: number;
   awayTeamGoals: number;
 }
 
 export interface IParams {
   id: string
+}
+
+export interface ITeamBody {
+  homeTeamId: number,
+  awayTeamId: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+  inProgress: boolean,
 }

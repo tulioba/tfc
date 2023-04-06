@@ -58,4 +58,20 @@ export default class MatchController {
       next(error);
     }
   };
+
+  public addNewMatch = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      console.log(req.body);
+
+      const data = await this.matchService.addNewMatch(req.body);
+
+      res.status(data.status).json(data.message);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
