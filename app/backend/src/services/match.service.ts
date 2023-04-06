@@ -1,7 +1,8 @@
 // import * as sequelize from 'sequelize';
 import Match from '../database/models/Match';
 import Team from '../database/models/Team';
-// import ErrorMessage from '../errorTypes/error.message';
+import ErrorMessage from '../errorTypes/error.message';
+import ErrorStatus from '../errorTypes/error.status';
 import GoodStatus from '../errorTypes/statusOkTypes/status.type';
 import { Idata, IScoreBody, ITeamBody } from '../interfaces/index';
 
@@ -67,6 +68,12 @@ export default class MatchService {
   };
 
   public addNewMatch = async (body: ITeamBody) => {
+    if (body.homeTeamId === body.awayTeamId) {
+      throw Object({
+        status: ErrorStatus.teamsMustBeDifferents,
+        message: ErrorMessage.noTwinsFairMatch });
+    }
+
     const response = await this.matchModel.create({
       homeTeamId: body.homeTeamId,
       awayTeamId: body.awayTeamId,

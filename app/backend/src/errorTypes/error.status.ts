@@ -3,4 +3,5 @@ export default abstract class ErrorStatus {
   static readonly statusUnauthorized = 401;
   static readonly statusTokenNotFound = 401;
   static readonly statusTokenMustBeValid = 401;
+  static readonly teamsMustBeDifferents = 422;
 }
