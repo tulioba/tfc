@@ -22,8 +22,6 @@ describe('Testando rota /login',async () => {
       password: 'secret_admin'
     })
 
-    console.log(httpResponse.body)
-    
     expect(httpResponse.status).to.be.equal(200)
   })
 })

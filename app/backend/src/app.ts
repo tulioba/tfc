@@ -2,6 +2,7 @@ import * as express from 'express';
 import teamRouter from './routes/team.routes';
 import userRouter from './routes/user.routes';
 import matchRouter from './routes/match.routes';
+import leaderBoardRouter from './routes/Leaderboard.routes';
 import { IError } from './interfaces';
 
 class App {
@@ -29,6 +30,7 @@ class App {
     this.app.use('/teams', teamRouter);
     this.app.use('/login', userRouter);
     this.app.use('/matches', matchRouter);
+    this.app.use('/leaderboard', leaderBoardRouter);
 
     this.app.use((error:
     IError, _req: express.Request, res: express.Response, _next: express.NextFunction) => {

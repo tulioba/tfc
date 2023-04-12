@@ -80,6 +80,14 @@ export default class MatchService {
       throw Object({ status: 404, message: 'There is no team with such id!' });
     }
 
+    // const teamsExist = await this.teamModel.findAll({
+    //   where: {
+    //     id: {
+    //       [Op.in]: [body.homeTeamId, body.awayTeamId]
+    //     }
+    //   }
+    // });
+
     const response = await this.matchModel.create({
       homeTeamId: body.homeTeamId,
       awayTeamId: body.awayTeamId,
