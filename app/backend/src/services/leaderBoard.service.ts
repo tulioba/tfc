@@ -100,7 +100,7 @@ export default class LeaderBoardService {
   //     if (gols.homeTeamGoals) {
   //       goalsFavor += gols.homeTeamGoals;
   //     }
-  //     console.log(goalsFavor);
+  //     console.log(goalsFavor);;
   //     return goalsFavor;
   //   }).reduce((acc, curr) => acc + curr, 0);
   //   return countingGalsFavor;
