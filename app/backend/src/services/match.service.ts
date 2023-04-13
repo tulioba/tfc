@@ -86,7 +86,7 @@ export default class MatchService {
     //       [Op.in]: [body.homeTeamId, body.awayTeamId]
     //     }
     //   }
-    // });
+    // });.
 
     const response = await this.matchModel.create({
       homeTeamId: body.homeTeamId,
