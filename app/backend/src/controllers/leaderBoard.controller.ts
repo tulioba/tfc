@@ -12,7 +12,7 @@ export default class LeaderBoardController {
     try {
       const data = await this.leaderBoardService.getAllMatches();
 
-      res.status(data.status).json(data.message);
+      res.status(200).json(data);
     } catch (error) {
       next(error);
     }
